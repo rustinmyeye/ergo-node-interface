@@ -1,5 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Getting Started
+
+This project requires Node.js (v16.x or higher) and Yarn package manager.
+
+To install all of the required dependencies:
+
+### `yarn install`
+
+If you're using Node.js v17 or higher, set the following environment variable to avoid OpenSSL errors:
+
+### `export NODE_OPTIONS=--openssl-legacy-provider`
+
 ## Available Scripts
 
 In the project directory, you can run:

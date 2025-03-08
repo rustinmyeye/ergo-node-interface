@@ -62,13 +62,15 @@ const DashboardView = ({
 
   const syncStage = fullHeight === null ? 'header' : 'block';
 
-  const progress =
-    // eslint-disable-next-line no-nested-ternary
-    fullHeight === null
-      ? maxPeerHeight === null
-        ? null
-        : ((headersHeight / maxPeerHeight) * 100).toFixed(2)
-      : ((fullHeight / headersHeight) * 100).toFixed(2);
+  let progress = null;
+
+  if (fullHeight === null) {
+    if (maxPeerHeight !== null) {
+      progress = ((headersHeight / maxPeerHeight) * 100).toFixed(2);
+    }
+  } else {
+    progress = ((fullHeight / headersHeight) * 100).toFixed(2);
+  }
 
   const explorer = `https://${
     network === 'mainnet' ? 'explorer' : network
@@ -78,17 +80,17 @@ const DashboardView = ({
     <>
       <div className="dashboard">
         <h2 className="dashboard__title">Node Information</h2>
-        <div className="dashboard__container">
-          <div className="dashboard__item">
+        <div className="dashboard__container row">
+          <div className="col-lg-3 col-md-4 col-6 dashboard__item">
             <InfoCard className="card rounded-0 shadow-none">
               <p className="info-card__title">Version</p>
               <p className="info-card__label">{appVersion}</p>
             </InfoCard>
           </div>
-          <div className="dashboard__item">
+          <div className="col-lg-3 col-md-4 col-6 dashboard__item">
             <SynchCard nodeInfo={nodeInfo} />
           </div>
-          <div className="dashboard__item">
+          <div className="col-lg-3 col-md-4 col-6 dashboard__item">
             <InfoCard className="rounded-0 shadow-none">
               <p className="info-card__title">Started at</p>
               <p className="info-card__label">
@@ -97,7 +99,7 @@ const DashboardView = ({
             </InfoCard>
           </div>
           {fullHeight === null ? null : (
-            <div className="dashboard__item">
+            <div className="col-lg-3 col-md-4 col-6 dashboard__item">
               <InfoCard className="rounded-0 shadow-none">
                 <p className="info-card__title">Current height</p>
                 <p className="info-card__label">{fullHeight}</p>
@@ -105,7 +107,7 @@ const DashboardView = ({
             </div>
           )}
           {bestHeaderId === null ? null : (
-            <div className="dashboard__item">
+            <div className="col-lg-3 col-md-4 col-6 dashboard__item">
               <InfoCard className="rounded-0 shadow-none">
                 <p className="info-card__title">Best block id</p>
                 <p className="info-card__label">
@@ -116,20 +118,20 @@ const DashboardView = ({
               </InfoCard>
             </div>
           )}
-          <div className="dashboard__item">
+          <div className="col-lg-3 col-md-4 col-6 dashboard__item">
             <InfoCard className="rounded-0 shadow-none">
               <p className="info-card__title">Mining enabled</p>
               <p className="info-card__label">{isMining ? 'Yes' : 'No'}</p>
             </InfoCard>
           </div>
-          <div className="dashboard__item">
+          <div className="col-lg-3 col-md-4 col-6 dashboard__item">
             <InfoCard className="rounded-0 shadow-none">
               <p className="info-card__title">Peers connected</p>
               <p className="info-card__label">{peersCount}</p>
             </InfoCard>
           </div>
           {!progress || progress === 100 ? null : (
-            <div className="dashboard__item">
+            <div className="col-lg-3 col-md-4 col-6 dashboard__item">
               <InfoCard className="rounded-0 shadow-none">
                 <p className="info-card__title">Sync progress</p>
                 <p className="info-card__label">
@@ -148,11 +150,12 @@ const DashboardView = ({
           )}
         </div>
       </div>
+
       {ergPrice && (
         <div className="dashboard">
           <h2 className="dashboard__title">ERG Information</h2>
-          <div className="dashboard__container">
-            <div className="dashboard__item">
+          <div className="dashboard__container row">
+            <div className="col-lg-3 col-md-4 col-6 dashboard__item">
               <InfoCard className="rounded-0 shadow-none">
                 <p className="info-card__title">
                   ERG price in $ <br />
@@ -164,17 +167,18 @@ const DashboardView = ({
           </div>
         </div>
       )}
+
       {walletStatusData && (
         <div className="dashboard">
           <h2 className="dashboard__title">Wallet Information</h2>
-          <div className="dashboard__container">
-            <div className="dashboard__item">
+          <div className="dashboard__container row">
+            <div className="col-lg-3 col-md-4 col-6 dashboard__item">
               <InfoCard className="rounded-0 shadow-none">
                 <p className="info-card__title">Initialization state</p>
                 <p className="info-card__label">{getWalletStatus(isWalletInitialized)}</p>
               </InfoCard>
             </div>
-            <div className="dashboard__item">
+            <div className="col-lg-3 col-md-4 col-6 dashboard__item">
               <InfoCard className="rounded-0 shadow-none">
                 <p className="info-card__title">Lock state</p>
                 <p className="info-card__label">
@@ -182,14 +186,14 @@ const DashboardView = ({
                 </p>
               </InfoCard>
             </div>
-            <div className="dashboard__item">
+            <div className="col-lg-3 col-md-4 col-6 dashboard__item">
               <WalletSyncCard
                 walletStatusData={walletStatusData}
                 headersHeight={nodeInfo.headersHeight}
               />
             </div>
             {walletBalanceData && (
-              <div className="dashboard__item">
+              <div className="col-lg-3 col-md-4 col-6 dashboard__item">
                 <InfoCard className="rounded-0 shadow-none">
                   <p className="info-card__title">Balance</p>
                   <p className="info-card__label">
@@ -203,7 +207,7 @@ const DashboardView = ({
               </div>
             )}
             {walletBalanceData && (
-              <div className="dashboard__item">
+              <div className="col-lg-3 col-md-4 col-6 dashboard__item">
                 <InfoCard className="rounded-0 shadow-none">
                   <p className="info-card__title">Assets</p>
                   <p className="info-card__label">

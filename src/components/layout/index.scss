@@ -1,23 +1,53 @@
-.main-container {
-  position: absolute;
-  margin-top: 74px;
-  top: 0;
-  left: 256px;
-  right: 0px;
-  bottom: 0px;
-}
-
+/* Base styles for the sidebar */
 .sidebar {
   position: absolute;
-  height: calc(100% - 74px);
+  height: 100%;
   width: 256px;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: none !important;
+  top: 74px; /* Adjust to be below the header */
 }
 
+/* Adjusting navbar */
 .navbar {
   background: #000;
   color: #fff;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.main-container {
+  margin-top: 0; /* Remove the margin-top */
+  margin-left: 256px; /* Sidebar width */
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.content {
+  padding-top: 0; /* Remove unnecessary padding */
+}
+
+/* For small screens (up to 768px) */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    top: 0;
+    margin-bottom: 16px; /* Space between sidebar and content */
+  }
+
+  .main-container {
+    margin-left: 0;
+  }
+
+  .navbar {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .content {
+    padding-top: 16px; /* Adjust content padding */
+  }
 }

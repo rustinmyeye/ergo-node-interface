@@ -1,14 +1,14 @@
 .wallet-container {
   padding: 32px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 400px);
+  grid-template-columns: repeat(auto-fill, 400px); /* Original 400px for each item */
   grid-gap: 32px;
 }
 
 .amount-container {
   position: relative;
 }
-//
+
 .btn-add-all {
   position: absolute;
   right: 0px;
@@ -21,4 +21,12 @@
 
 .mt-20 {
   margin-top: 20px;
+}
+
+/* Media query for smaller screens (mobile) */
+@media (max-width: 600px) {
+  .wallet-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust for smaller screens */
+    padding: 16px;  /* Reduce padding on smaller screens */
+  }
 }

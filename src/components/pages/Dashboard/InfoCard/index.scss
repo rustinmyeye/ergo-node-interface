@@ -43,4 +43,35 @@
     border-radius: 10px;
     display: inline-block;
   }
+
+  // Mobile Styles
+  @media (max-width: 768px) {
+    padding: 12px;
+    max-height: unset; // Allow cards to expand naturally on smaller screens
+    text-align: center;
+
+    &__title {
+      font-size: 14px;
+    }
+
+    &__label {
+      font-size: 14px;
+    }
+
+    &__progress {
+      width: 100%; // Full width for better mobile presentation
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+
+    &__title {
+      font-size: 12px;
+    }
+
+    &__label {
+      font-size: 12px;
+    }
+  }
 }
